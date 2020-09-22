@@ -1,0 +1,29 @@
+---
+- name: "Check for logstash-exporter binary"
+  stat:
+    path: "/usr/local/bin/logstash-exporter"
+  changed_when: false
+  register: logstash_binary
+
+- when: not logstash_binary.stat.exists
+  block:
+    - name: "Download logstash-exporter..."
+      get_url:
+        url: '{{ logstash_exporter_url }}'
+        dest: /usr/local/bin/logstash-exporter
+        timeout: 120
+        mode: 0755
+
+- name: "Create systemd for logstash_exporter"
+  template:
+    src: logstash_exporter.service
+    dest: /etc/systemd/system/
+    mode: 0644
+  notify: "restart logstash_exporter"
+
+- name: "Start logstash_exporter.service"
+  systemd:
+    name: logstash_exporter
+    state: started
+    enabled: yes
+    daemon_reload: yes

@@ -1,0 +1,5 @@
+---
+logstash_exporter_version:  "0.6.2"
+logstash_exporter_url:      "https://gitlab.com/alxrem/prometheus-logstash-exporter/uploads/2b66e95552dcd921fbbf667bb2e46cf3/prometheus-logstash-exporter-{{ logstash_exporter_version }}-linux-amd64"
+logstash_exporter_port:     ":9114"
+logstash_exporter_loglevel: info

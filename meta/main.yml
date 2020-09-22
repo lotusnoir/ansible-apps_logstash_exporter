@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: "Philippe leal"
+  description: "Install and configure logstash_exporter"
+  role_name: apps_logstash_exporter
+  license: "MIT"
+  min_ansible_version: 2.8
+
+  platforms:
+    - name: "Debian"
+      versions:
+        - "buster"
+        - "stretch"
+        - "jessie"
+
+  galaxy_tags:
+    - prometheus
+    - logstash
