@@ -1,18 +1,22 @@
 ---
 galaxy_info:
   author: "Philippe leal"
-  description: "Install and configure logstash_exporter"
+  description: "Install and configure logstash metrics exporter for prometheus"
   role_name: apps_logstash_exporter
-  license: "MIT"
+  license: "license: Apache License, Version 2.0"
   min_ansible_version: 2.8
 
   platforms:
     - name: "Debian"
       versions:
-        - "buster"
-        - "stretch"
-        - "jessie"
+        - "all"
+    - name: "Ubuntu"
+      versions:
+        - "all"
 
   galaxy_tags:
     - prometheus
     - logstash
+    - exporter
+
+dependencies: []

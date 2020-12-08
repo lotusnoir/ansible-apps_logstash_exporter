@@ -1,29 +1,36 @@
 ---
+- name: "End play if distribution not suported"
+  meta: end_host
+  when:
+    - ansible_distribution != "Debian"
+    - ansible_distribution != "Ubuntu"
+    - ansible_distribution != "CentOS"
+
 - name: "Check for logstash-exporter binary"
   stat:
-    path: "/usr/local/bin/logstash-exporter"
+    path: "{{ logstash_exporter_install_dir }}/logstash-exporter"
   changed_when: false
   register: logstash_binary
 
-- when: not logstash_binary.stat.exists
+- when: not logstash_binary.stat.exists or logstash_exporter_force_install|bool
   block:
     - name: "Download logstash-exporter..."
       get_url:
         url: '{{ logstash_exporter_url }}'
-        dest: /usr/local/bin/logstash-exporter
-        timeout: 120
-        mode: 0755
+        dest: '{{ logstash_exporter_install_dir }}/logstash-exporter'
+        timeout: 60
+        mode: '0755'
 
 - name: "Create systemd for logstash_exporter"
   template:
-    src: logstash_exporter.service.j2
-    dest: /etc/systemd/system/logstash_exporter.service
-    mode: 0644
+    src: 'logstash_exporter.service.j2'
+    dest: '/etc/systemd/system/logstash_exporter.service'
+    mode: '0644'
   notify: "restart logstash_exporter"
 
-- name: "Start logstash_exporter.service"
+- name: "Enable and Start logstash_exporter.service"
   systemd:
     name: logstash_exporter
     state: started
-    enabled: yes
-    daemon_reload: yes
+    enabled: true
+    daemon_reload: true

@@ -1,5 +1,5 @@
 ---
-- name: "restart logstash_exporter"
+- name: restart logstash_exporter
   service:
-    name: "logstash_exporter"
-    state: "restarted"
+    name: logstash_exporter
+    state: restarted
