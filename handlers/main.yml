@@ -1,5 +1,5 @@
 ---
-- name: restart logstash_exporter
+- name: Restart logstash_exporter
   ansible.builtin.service:
     name: logstash_exporter
     state: restarted
