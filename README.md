@@ -22,6 +22,7 @@
 ## Description
 
 Deploy [logstash_exporter](https://gitlab.com/alxrem/prometheus-logstash-exporter) using ansible.
+
 ## Requirements
 
 none
