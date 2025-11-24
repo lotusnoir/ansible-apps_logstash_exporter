@@ -8,7 +8,12 @@ StartLimitInterval=0
 [Service]
 Type=simple
 Restart=always
-ExecStart={{ logstash_exporter_install_dir }}/logstash-exporter -web.listen-address {{ logstash_exporter_port }} -log.level {{ logstash_exporter_loglevel }}
+ExecStart={{ logstash_exporter_install_dir }}/logstash-exporter \
+		-logstash.host {{ logstash_exporter_server_address }} \
+		-logstash.port {{ logstash_exporter_server_port }} \
+		-logstash.timeout {{ logstash_exporter_timeout }} \
+		-web.listen-address {{ logstash_exporter_listen_port }} \
+		-web.telemetry-path {{ logstash_exporter_path }}
 ExecReload=/bin/kill -HUP $MAINPID
 SyslogIdentifier=logstash-exporter
 RestartSec=1

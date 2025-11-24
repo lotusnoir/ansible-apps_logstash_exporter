@@ -1,10 +1,14 @@
 ---
 # Binary install
-logstash_exporter_version: "0.7.0"
-logstash_exporter_url: "https://github.com/alxrem/prometheus-logstash-exporter/releases/download/{{ logstash_exporter_version }}/prometheus-logstash-exporter_{{ logstash_exporter_version }}_linux_amd64"
+logstash_exporter_version: "0.7.15"
+logstash_exporter_pkg: "prometheus-logstash-exporter_{{ logstash_exporter_version }}_linux_amd64"
+logstash_exporter_url: "https://github.com/lotusnoir/prometheus-logstash-exporter/releases/download/{{ logstash_exporter_version }}/{{ logstash_exporter_pkg }}"
 logstash_exporter_install_dir: "/usr/local/bin"
 logstash_exporter_force_install: false
 
 # Systemd options
-logstash_exporter_port: ":9114"
-logstash_exporter_loglevel: info
+logstash_exporter_server_address: "0.0.0.0"
+logstash_exporter_server_port: "9600"
+logstash_exporter_timeout: "5s"
+logstash_exporter_listen_port: ":9114"
+logstash_exporter_path: "/metrics"
